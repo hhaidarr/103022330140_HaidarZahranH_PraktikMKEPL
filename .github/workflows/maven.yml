@@ -47,3 +47,7 @@ jobs:
         with:
           name: java-app-jar
           path: target/*.jar
+
+
+      - name: Build dengan Maven
+        run: mvn -B clean package
