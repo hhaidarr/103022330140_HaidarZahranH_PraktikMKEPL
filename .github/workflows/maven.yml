@@ -47,39 +47,3 @@ jobs:
         with:
           name: java-app-jar
           path: target/*.jar
-
-
-      deploy-to-staging:
-    needs: sonarcloud
-    runs-on: ubuntu-latest
-    environment: staging 
-    steps:
-      - name: Download Artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: java-app-jar
-
-      - name: Simulate Staging Deployment
-        run: |
-          echo "Menjalankan gerbang Continuous Delivery..."
-          echo "File JAR berhasil diverifikasi dan siap dikirim ke lingkungan Staging!"
-
-
-  deploy-to-production:
-    needs: deploy-to-staging
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download Artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: java-app-jar
-
-      - name: Deploy JAR to Production Server (Simulation)
-        env:
-          HOST: ${{ secrets.SERVER_HOST }}
-          USER: ${{ secrets.SERVER_USER }}
-        run: |
-          echo "Menghubungkan ke server produksi melalui SSH ke $USER@$HOST..."
-          echo "Mengirimkan file .jar ke direktori /var/www/java-apps/..."
-          echo "Koneksi SSH ke Production Berhasil!"
-          echo "Aplikasi Java diperbarui dan dijalankan otomatis tanpa intervensi manual!"
