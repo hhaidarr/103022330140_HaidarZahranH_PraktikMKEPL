@@ -37,6 +37,7 @@ public class CounterTest {
 			testCounter.decrement();
 			assertEquals(testCounter.getCount(), i * -1);
 		}
+		System.out.println("Hello world");
 	}
 
 }
